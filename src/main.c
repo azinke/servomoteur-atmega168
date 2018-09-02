@@ -2,13 +2,13 @@
 #include <avr/interrupt.h>
 
 
-unsigned int sens = 0;	// Détermine le sens de rotation du servomoteur
+volatile unsigned int sens = 0;	// Détermine le sens de rotation du servomoteur
 						// 0: pour le sens ->  et 1 pour le sens <-
 
 // La pause entre de sens de rotation sera de ~1s
-unsigned int compteur = 0;	// Pour mettre une pause entre les deux sens de rotation
+volatile unsigned int compteur = 0;	// Pour mettre une pause entre les deux sens de rotation
 
-unsigned long rotation = 1500; // 1.5ms
+volatile unsigned long rotation = 1500; // 1.5ms
 
 int main(){
 	/*
