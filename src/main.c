@@ -1,5 +1,4 @@
 #include <avr/io.h>
-#include <avr/delay.h>
 #include <avr/interrupt.h>
 
 
@@ -60,7 +59,7 @@ void delay_us(unsigned long value){
 
 ISR (TIMER0_OVF_vect){
 	PORTB |= 0x01;
-	delay_ms(rotation);
+	delay_us(rotation);
 	PORTB &= ~(1);
 	if(sens = 0){
 		if(rotation < 2000) rotation += 10;
