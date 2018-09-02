@@ -62,3 +62,13 @@ Le raccordement d'un servomoteur s'effectue à l'aide de trois (03) fils:
 
 La commande du servomoteur se fera dans le cadre de ce projet à l'aide du 
 microcontrôleur ATMEGA 168 et la programmation en C.
+
+La commande du moteur sera connecté à la broche `PB0`
+
+						|				  |	Servomoteur
+			ATMEGA168	|			GND---|
+						|				  |
+					PB0	|-----------------| Commande 
+						|				  |
+						|			VCC---|
+
