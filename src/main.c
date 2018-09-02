@@ -57,6 +57,11 @@ void delay_us(unsigned long value){
 	}
 }
 
+/*
+ * Sous routine d'interruption
+ *
+ * TIMER0_OVF: Vecteur d'interruption du timer
+ */
 ISR (TIMER0_OVF_vect){
 	PORTB |= 0x01;
 	delay_us(rotation);
@@ -74,5 +79,7 @@ ISR (TIMER0_OVF_vect){
 			if(compteur >= 41){ compteur = 0; sens = 0; }
 		}
 	}
+
+	TCNT0 = 255 - 194; // Mettre à jour la valeur initial du counter du timer0
 }
 
