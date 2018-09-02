@@ -66,9 +66,9 @@ microcontrôleur ATMEGA 168 et la programmation en C.
 La commande du moteur sera connecté à la broche `PB0`
 
 						|				  |	Servomoteur
-			ATMEGA168	|			GND---|
+			       ATMEGA168	|			    GND---|
 						|				  |
-					PB0	|-----------------| Commande 
+					PB0	|---------------------------------| Commande 
 						|				  |
-						|			VCC---|
+						|			    VCC---|
 
