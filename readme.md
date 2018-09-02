@@ -72,3 +72,9 @@ La commande du moteur sera connecté à la broche `PB0`
 						|				  |
 						|			    VCC---|
 
+## Lien utile
+
+- [Wikiversity](https://fr.wikiversity.org/wiki/Micro_contr%C3%B4leurs_AVR)
+- [Efundies](https://efundies.com/category/avr/)
+- [Servomoteur](https://eskimon.fr/tuto-arduino-602-un-moteur-qui-a-de-la-t%C3%AAte-le-servomoteur)
+- [Explore Embedded](https://exploreembedded.com)
