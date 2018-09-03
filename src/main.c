@@ -1,6 +1,16 @@
+/**
+    THIS CODE IS NOT WORKING YET
+
+    TODO checkout timer 0 & 1 register configurations
+**/
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 
+#define F_CPU 8000000UL
+
+#define WAIT 1000
 
 volatile unsigned int sens = 0;	// Détermine le sens de rotation du servomoteur
 						// 0: pour le sens ->  et 1 pour le sens <-
@@ -9,6 +19,12 @@ volatile unsigned int sens = 0;	// Détermine le sens de rotation du servomoteur
 volatile unsigned int compteur = 0;	// Pour mettre une pause entre les deux sens de rotation
 
 volatile unsigned long rotation = 1500; // 1.5ms
+
+volatile unsigned int _flag = 0;    // flag d'interruption
+
+unsigned int _timer = 0;
+
+
 
 int main(){
 	/*
@@ -40,22 +56,46 @@ int main(){
 
 	sei();
 
-	while(1){ };
+	while(1){
+	    if(_flag && (_timer >= WAIT)){
+            if(sens == 0){
+                if(rotation < 2000){ rotation += 10; }
+                else{ sens = 1; }
+            }else if(sens == 1){
+	            if(rotation > 1500){ rotation -= 10; }
+	            else{ sens = 0; }
+            }
+            _timer = 0;
+        }
+        
+	    if(_flag){
+	        PORTB |= 0x01;
+	        _delay_us(rotation);
+	        PORTB &= ~(1);
+	        _flag = 0;
+        }
+        
+        _delay_ms(1);
+        _timer++;
+	};
 
 	return 0;
 }
 
 /*
- *	En admettant une horloge de 8 MHz
- *	@fonction: delay d'une milliseconde
- */
-void delay_us(unsigned long value){
-	unsigned long i = 0;
-	volatile unsigned int j = 0;
-	for(i = 0; i < value; i++){
-		for(j = 0; j < 8; j++){ }
-	}
+void write(unsigned int value){
+    if(_flag && (_timer >= 1000)){
+        if(sens == 0){
+            if(rotation < 2000){ rotation += 10; }
+            else{ sens = 1; }
+        }else if(sens == 1){
+	        if(rotation > 1500){ rotation -= 10; }
+	        else{ sens = 0; }
+        }
+        _timer = 0;
+    }
 }
+*/
 
 /*
  * Sous routine d'interruption
@@ -63,22 +103,7 @@ void delay_us(unsigned long value){
  * TIMER0_OVF: Vecteur d'interruption du timer
  */
 ISR (TIMER0_OVF_vect){
-	PORTB |= 0x01;
-	delay_us(rotation);
-	PORTB &= ~(1);
-	if(sens == 0){
-		if(rotation < 2000) rotation += 10;
-		else {
-			compteur++;
-			if(compteur >= 41) { compteur = 0; sens = 1; }
-		}
-	}else if(sens == 1){
-		if(rotation > 1500) rotation -= 10;
-		else {
-			compteur++;
-			if(compteur >= 41){ compteur = 0; sens = 0; }
-		}
-	}
+    _flag = 1;
 
 	TCNT0 = 255 - 194; // Mettre à jour la valeur initial du counter du timer0
 }
