@@ -78,3 +78,4 @@ La commande du moteur sera connecté à la broche `PB0`
 - [Efundies](https://efundies.com/category/avr/)
 - [Servomoteur](https://eskimon.fr/tuto-arduino-602-un-moteur-qui-a-de-la-t%C3%AAte-le-servomoteur)
 - [Explore Embedded](https://exploreembedded.com)
+- [Electrowings - Servomoteur](http://www.electronicwings.com/avr-atmega/servo-motor-interfacing-with-atmega16)
