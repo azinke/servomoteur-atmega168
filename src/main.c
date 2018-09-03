@@ -40,7 +40,7 @@ int main(){
 
 	sei();
 
-	while(true){ };
+	while(1){ };
 
 	return 0;
 }
