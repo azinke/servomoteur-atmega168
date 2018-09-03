@@ -66,13 +66,13 @@ ISR (TIMER0_OVF_vect){
 	PORTB |= 0x01;
 	delay_us(rotation);
 	PORTB &= ~(1);
-	if(sens = 0){
+	if(sens == 0){
 		if(rotation < 2000) rotation += 10;
 		else {
 			compteur++;
 			if(compteur >= 41) { compteur = 0; sens = 1; }
 		}
-	}else if(sens = 1){
+	}else if(sens == 1){
 		if(rotation > 1500) rotation -= 10;
 		else {
 			compteur++;
